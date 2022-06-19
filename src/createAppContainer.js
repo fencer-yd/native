@@ -365,7 +365,11 @@ export default function createNavigationContainer(Component) {
 
         (_this$_linkingSub2 = this._linkingSub) === null || _this$_linkingSub2 === void 0 ? void 0 : _this$_linkingSub2.remove();
       } else {
-        Linking.removeEventListener('url', this._handleOpenURL);
+        if (this._linkingSub?.remove) {
+          this._linkingSub?.remove();
+        } else {
+          Linking.removeEventListener('url', this._handleOpenURL);
+        }
       }
 
       this.subs && this.subs.remove();
